@@ -10,6 +10,14 @@ module.exports = {
       port:7545,
       network_id:"*" //match any network id
     },
+    kovan:{
+      provider:function(){
+        return new HDWalletProvider(
+          // private key
+          // url to an ethereum node
+        )
+      },
+    }
   },
   contracts_directory:'./src/contracts/',
   contracts_build_directory:'./src/abis/', 

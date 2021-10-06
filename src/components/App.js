@@ -21,10 +21,13 @@ import {isMobile} from 'react-device-detect';
 
 class App extends Component {
   componentWillMount() {
-    this.loadBlockchainData(this.props.dispatch)
-    if(!isMobile==true){
       window.ethereum.enable()
-    }
+
+    this.loadBlockchainData(this.props.dispatch)
+    // if(isMobile===true){
+    //   window.ethereum.enable()
+    // }
+
   }
 
   async loadBlockchainData(dispatch) {
@@ -94,3 +97,4 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps)(App);
+
