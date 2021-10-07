@@ -14,6 +14,16 @@ import Content from './Content';
 import {contractsLoadedSelector} from '../store/selectors'
 
 import {isMobile} from 'react-device-detect';
+import Construction from './construction';
+
+
+import {
+  exchangeSelector,
+  tokenSelector,
+  
+} from '../store/selectors'
+
+
 
 
 
@@ -33,7 +43,8 @@ class App extends Component {
   async loadBlockchainData(dispatch) {
 
 
-    
+
+
 
     // if(!isMobile) {await window.ethereum.enable();}
 
@@ -47,15 +58,19 @@ class App extends Component {
     const exchange = await loadExchange(web3,networkId,dispatch)
     if(!exchange){
       window.alert("Exchange smart contract not detected on the current network.Please select another newtwork with metamask")
+      // &&
+      // </Construction>
     }
 
     const accounts = await loadAccount(web3,dispatch)
     const token = await loadToken(web3,networkId,dispatch)
+    
     if(!token){
       window.alert("Token smart contract not detected on the current network.Please select another newtwork with metamask")
       return
     }
     
+
 
     // const totalSupply = await token.methods.totalSupply().call()
     // console.log("totalSupply", totalSupply)
@@ -80,7 +95,13 @@ class App extends Component {
     return (
       <div>
         <Navbar/>
-        {this.props.contractsLoaded ? <Content/> : <div className="content"></div>  }
+        {/* {this.props.contractsLoaded ? <Content/> : <div className="content"></div>  } */}
+        
+        {this.props.contractsLoaded ? <Content/> : <Construction/>  }
+
+
+
+
         {/* {this.props.contractsLoaded && !isMobile ? <Content/> : <Mobileint/>}  */}
         {/* <Mobileint/>  */}
         {/* {this.props.contractsLoaded && isMobile ? <Content/> : <Mobileint/>) } */}
@@ -91,10 +112,19 @@ class App extends Component {
 }
 
 function mapStateToProps(state){
+
+
   return{
-    contractsLoaded:contractsLoadedSelector(state)
+    contractsLoaded:contractsLoadedSelector(state),
+    // exchange: exchangeSelector(state),
+    // token: tokenSelector(state),
+    // showForm:!this.props.token||!this.props.exchange
   }
 }
 
 export default connect(mapStateToProps)(App);
 
+
+
+
+// uncomment line 98 and comment line 100
