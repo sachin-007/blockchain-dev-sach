@@ -1,6 +1,3 @@
-
-
-
 import {tokens,EVM_REVERT,ETHER_ADDRESS,ether} from './helpers'
 
 const Token = artifacts.require('./Token')
@@ -248,6 +245,7 @@ contract('Exchange',([deployer,feeAccount,user1,user2])=>{
 		})
 	})
 
+
 	describe("order actions",async()=>{
 		beforeEach(async()=>{
 			// user1 deposite ether
@@ -279,9 +277,13 @@ contract('Exchange',([deployer,feeAccount,user1,user2])=>{
 					balance = await exchange.balanceOf(ETHER_ADDRESS,user1)
 					balance.toString().should.equal('0','user2 Ether deducted')
 					balance = await exchange.balanceOf(token.address,user2)
+					// balance.toString().should.equal(tokens(0.09).toString(),'user2 tokens deducted with fee applied')
+					console.log(balance.toString())
+					// balance.toString().should.equal(tokens(9).toString(),'user2 tokens deducted with fee applied')
 					balance.toString().should.equal(tokens(0.9).toString(),'user2 tokens deducted with fee applied')
 					const feeAccount = await exchange.feeAccount()
 					balance = await exchange.balanceOf(token.address,feeAccount)
+					// balance.toString().should.equal(tokens(0.01).toString(),"feeAccount received fee")
 					balance.toString().should.equal(tokens(0.1).toString(),"feeAccount received fee")
 				})
 
