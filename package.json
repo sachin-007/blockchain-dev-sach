@@ -1,10 +1,10 @@
 {
   "name": "blockchain-dev-sach",
   "engines": {
-    "node": ">=12.x",
+    "node": "13.9.0",
     "npm": "<=5.0.0"
   },
-  "engineStrict" : true ,
+  
   "version": "0.1.0",
   "private": true,
   "dependencies": {
